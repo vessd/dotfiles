@@ -1,0 +1,119 @@
+{
+  "modules-left": [
+    "sway/workspaces",
+    "custom/github",
+    "custom/youtube",
+    "custom/mail",
+  ],
+
+  "modules-center": [],
+  
+  "modules-right": [
+    "custom/weather",
+    "pulseaudio",
+    "memory",
+    "cpu",
+    "network",
+    "custom/pacman",
+    "tray",
+    "clock",
+    "custom/power",
+  ],
+  
+  // Modules configuration
+  "sway/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "ﲵ",
+      "7": "",
+      "focused": "",
+      "urgent": "",
+      "default": "",
+    },
+    "icon-size": 15,
+  },
+
+  "custom/github": {
+    "format": "",
+    "on-click": "xdg-open https://github.com",
+    "tooltip": false,
+  },
+
+  "custom/youtube": {
+    "format": "輸",
+    "on-click": "xdg-open https://www.youtube.com/",
+    "tooltip": false,
+  },
+
+  "custom/mail": {
+    "format": "",
+    "on-click": "xdg-open https://mail.yandex.ru/",
+    "tooltip": false,
+  },
+
+  "custom/weather": {
+    "exec": "~/.local/bin/weather.sh",
+    "interval": 3600,
+    "tooltip": false,
+  },
+
+  "pulseaudio": {
+    "format": " {volume}%",
+    "format-muted": "ﳌ",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    "on-click": "alacritty -e pulsemixer",
+    "on-scroll-up": "pulsemixer --change-volume +5 && pulsemixer --get-volume > $SWAYSOCK.wob",
+    "on-scroll-down": "pulsemixer --change-volume -5 && pulsemixer --get-volume > $SWAYSOCK.wob",
+    "scroll-step": 1,
+  },
+
+  "memory": {
+    "format": "  {used:0.1f}/{total:0.1f} GiB",
+    "tooltip": false,
+  },
+
+  "cpu": {
+    "format": "  {usage}%",
+    "on-click": "alacritty -e htop",
+    "tooltip": false,
+  },
+
+  "network": {
+    "format-ethernet": "  {ifname}",
+    "format-disconnected": "",
+  },
+
+  "custom/pacman": {
+    "format": "  {}",
+    "interval": 3600,
+    "exec": "checkupdates | wc -l",
+    "exec-if": "exit 0",
+    "on-click": "alacritty -e paru; pkill -SIGRTMIN+8 waybar",
+    "signal": 8,
+    "tooltip": false,
+  },
+  
+  "tray": {
+    "spacing": 10,
+  },
+
+  "clock": {
+    "format": "{:%R}",
+    "format-alt": "{:%A, %d %B}",
+    "tooltip-format": "<big>{:%Y %b}</big>\n<tt>{calendar}</tt>",
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "wlogout -b 2 -p layer-shell",
+    "tooltip": false,
+  },
+}

@@ -1,0 +1,5 @@
+show=drun
+allow_images=true
+#drun-print_command=true
+hide_scroll=true
+width=400

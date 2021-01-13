@@ -1,0 +1,24 @@
+{
+    "label" : "logout",
+    "action" : "loginctl terminate-user $USER",
+    "text" : "Выход",
+    "keybind" : "e"
+}
+{
+    "label" : "reboot",
+    "action" : "systemctl reboot",
+    "text" : "Перезагрузка",
+    "keybind" : "r"
+}
+{
+    "label" : "shutdown",
+    "action" : "systemctl poweroff",
+    "text" : "Завершение работы",
+    "keybind" : "s"
+}
+{
+    "label" : "windows",
+    "action" : "systemctl reboot --boot-loader-entry=auto-windows",
+    "text" : "Перезагрузка в Windows 10",
+    "keybind" : "w"
+}

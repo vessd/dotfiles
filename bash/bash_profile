@@ -1,0 +1,18 @@
+#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+{{#if dotter.packages.sway}}
+# If running from tty1 start sway
+if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+    export MOZ_ENABLE_WAYLAND=1
+    export XDG_CURRENT_DESKTOP=sway
+    export XDG_SESSION_TYPE=wayland
+
+    exec systemd-cat -t sway sway
+fi
+{{/if ~}}
+{{#if (is_executable "cargo")}}
+export PATH="$PATH:~/.cargo/bin"
+{{/if ~}}
