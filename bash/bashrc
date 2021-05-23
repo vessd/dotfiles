@@ -12,3 +12,9 @@ PS1='[\u@\h \W]\$ '
 if [ -f /usr/share/doc/pkgfile/command-not-found.bash ]; then
     . /usr/share/doc/pkgfile/command-not-found.bash
 fi
+
+{{#if (is_executable "cargo") ~}}
+export PATH="$PATH:~/.local/bin:~/.cargo/bin"
+{{else}}
+export PATH="$PATH:~/.local/bin"
+{{/if ~}}

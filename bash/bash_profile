@@ -13,6 +13,3 @@ if [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
     exec systemd-cat -t sway sway
 fi
 {{/if ~}}
-{{#if (is_executable "cargo")}}
-export PATH="$PATH:~/.cargo/bin"
-{{/if ~}}
