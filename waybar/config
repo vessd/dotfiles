@@ -61,6 +61,7 @@
   "custom/weather": {
     "exec": "~/.local/bin/weather.sh",
     "interval": 3600,
+    "on-click": "foot bash -c 'curl -H \"Accept-Language: ru\" --compressed https://wttr.in/Санкт-Петербург && read -n 1'",
     "tooltip": false,
   },
 
@@ -69,7 +70,7 @@
     "format-muted": "ﳌ",
     "format-source": " {volume}%",
     "format-source-muted": "",
-    "on-click": "alacritty -e pulsemixer",
+    "on-click": "foot pulsemixer",
     "on-scroll-up": "pulsemixer --change-volume +5 && pulsemixer --get-volume > $SWAYSOCK.wob",
     "on-scroll-down": "pulsemixer --change-volume -5 && pulsemixer --get-volume > $SWAYSOCK.wob",
     "scroll-step": 1,
@@ -82,7 +83,7 @@
 
   "cpu": {
     "format": "  {usage}%",
-    "on-click": "alacritty -e htop",
+    "on-click": "foot htop",
     "tooltip": false,
   },
 
@@ -96,7 +97,7 @@
     "interval": 3600,
     "exec": "checkupdates | wc -l",
     "exec-if": "exit 0",
-    "on-click": "alacritty -e paru; pkill -SIGRTMIN+8 waybar",
+    "on-click": "foot paru && pkill -SIGRTMIN+8 waybar",
     "signal": 8,
     "tooltip": false,
   },
@@ -106,8 +107,8 @@
   },
 
   "clock": {
-    "format": "{:%R}",
-    "format-alt": "{:%A, %d %B}",
+    "format": "{:%A, %d %B %R}",
+    "on-click": "foot bash -c 'cal -3 && read -n 1'",
     "tooltip-format": "<big>{:%Y %b}</big>\n<tt>{calendar}</tt>",
   },
 

@@ -10,6 +10,8 @@
 exec mako
 # Automatically switch the horizontal / vertical window split
 exec autotiling
+exec telegram-desktop -startintray
+exec "sh -c 'sleep 2 && exec qbittorrent'"
 
 ### Windows rules
 for_window [class="(?i)mpv"] floating enable
@@ -29,7 +31,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -60,7 +62,7 @@ assign [title="discord"] 5
 
 # Additionally, you can issue commands with the following syntax.
 # This is useful to bind keys to changing the gap size.
-gaps inner 15
+gaps inner 5
 gaps outer 5
 smart_gaps on
 
