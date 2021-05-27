@@ -40,8 +40,8 @@ editor = "nano"
 # Local variables: background_file
 "sway" = "~/.config/sway/config"
 
-[alacritty.files]
-"alacritty" = "~/.config/alacritty"
+[foot.files]
+"foot.ini" = "~/.config/foot/foot.ini"
 
 [waybar.files]
 "waybar" = "~/.config/waybar"
@@ -59,7 +59,7 @@ editor = "nano"
 
 [sway]
 depends = [
-    "alacritty",
+    "foot",
     "bin",
     "bash",
     "mako",
