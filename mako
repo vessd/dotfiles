@@ -12,7 +12,7 @@ border-size=3
 border-radius=10
 border-color=#3b4252
 
-default-timeout=5000
+default-timeout=7000
 
 [urgency=high]
 ignore-timeout=1

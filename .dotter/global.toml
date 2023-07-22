@@ -1,19 +1,15 @@
-[common.files]
-# Local variables: hostname, ifname, user
+[etc.files]
 "host/hostname" = { target = "/etc/hostname", type = "template", owner = "root" }
 "host/hosts" = { target = "/etc/hosts", type = "template", owner = "root" }
 "locale/locale.gen" = { target = "/etc/locale.gen", type = "template", owner = "root" }
 "locale/locale.conf" = { target = "/etc/locale.conf", type = "template",  owner = "root" }
-"environment" = { target = "/etc/environment", type = "template", owner = "root" }
-"mkinitcpio.conf" = { target = "/etc/mkinitcpio.conf", type = "template", owner = "root" }
-"nanorc" = { target = "/etc/nanorc", type = "template", owner = "root" }
-"network" = { target = "/etc/systemd/network/20-wired.network", type = "template", owner = "root" }
+"mkinitcpio.conf.d" = { target = "/etc/mkinitcpio.conf.d", type = "template", owner = "root" }
 "tty1-autologin.conf" = { target = "/etc/systemd/system/getty@tty1.service.d/override.conf", type = "template", owner = "root" }
 
-[common.variables]
-# The first locale is the default locale
-locales = ["en_US"]
-editor = "nano"
+[user.files]
+"environment.d" = "~/.config/environment.d"
+"nanorc" = "~/.config/nano/nanorc"
+"backgrounds" = { target = "~/.local/share/backgrounds", type = "symbolic" }
 
 [pacman.files]
 "pacman/pacman.conf" = { target = "/etc/pacman.conf", type = "template", owner = "root" }
@@ -30,15 +26,13 @@ editor = "nano"
 "bin" = "~/.local/bin"
 
 [git.files]
-# Local variables: git_email, git_name
 "gitconfig" = "~/.gitconfig"
 
 [xdg-user-dirs.files]
 "xdg-user-dirs" = "~/.config"
 
 [sway.files]
-# Local variables: background_file
-"sway" = "~/.config/sway/config"
+"sway" = "~/.config/sway"
 
 [foot.files]
 "foot.ini" = "~/.config/foot/foot.ini"
@@ -70,4 +64,4 @@ depends = [
     ]
 
 [archlinux]
-depends = ["common", "pacman", "paru", "sway"]
+depends = ["etc", "user", "pacman", "paru", "sway"]

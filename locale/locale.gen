@@ -18,6 +18,5 @@
 #  The locale-gen command will generate all the locales,
 #  placing them in /usr/lib/locale.
 #
-{{#each locales}}
-    {{~this}}.UTF-8 UTF-8
-{{/each}}
+ru_RU.UTF-8 UTF-8
+en_US.UTF-8 UTF-8

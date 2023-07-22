@@ -1,6 +1,0 @@
-[Match]
-Name={{ifname}}
-
-[Network]
-DHCP=yes
-IPForward=1

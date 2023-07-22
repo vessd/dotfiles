@@ -10,11 +10,14 @@
 exec mako
 # Automatically switch the horizontal / vertical window split
 exec autotiling
-exec telegram-desktop -startintray
-exec "sh -c 'sleep 2 && exec qbittorrent'"
+exec nm-applet --indicator
+exec "sh -c 'sleep 5 && exec qbittorrent'"
 
 ### Windows rules
+## swaymsg -t get_tree
 for_window [class="(?i)mpv"] floating enable
+for_window [class="Steam"] floating enable
+for_window [class="Paradox Launcher"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [title="Discord Updater"] floating enable
 
@@ -35,8 +38,8 @@ set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-#set $menu wofi | awk '{print $1}' | xargs swaymsg exec --
-set $menu wofi
+# set $menu wofi | xargs swaymsg exec --
+set $menu pkill wofi || wofi --exec-search
 
 # Borders
 default_border pixel 3
@@ -44,7 +47,7 @@ smart_borders on
 
 # Font
 # title_align center
-font pango:ProductSansMedium 13px 
+font pango:ProductSansMedium 13px
 
 # Window decoration
 # class                 border  backgr. text    indicator child_border
@@ -69,7 +72,7 @@ smart_gaps on
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg {{background_file}} fill
+output * bg ~/.local/share/backgrounds/anime-smd-1.jpg fill
 #
 # Example configuration:
 #
@@ -91,7 +94,7 @@ output DP-1 {
 #
 # exec swayidle -w \
 #          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 #          before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -137,8 +140,8 @@ input "type:keyboard" {
     # mouse button for dragging.
     floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym --to-code $mod+Shift+c reload
+    # Reload sway
+    bindsym --to-code $mod+Shift+r reload
 
     # Power menu
     bindsym $mod+Shift+e exec wlogout -b 2 -p layer-shell
@@ -203,9 +206,9 @@ input "type:keyboard" {
     bindsym --to-code $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym --to-code $mod+s layout stacking
-    bindsym --to-code $mod+w layout tabbed
-    bindsym --to-code $mod+e layout toggle split
+    # bindsym --to-code $mod+s layout stacking
+    # bindsym --to-code $mod+w layout tabbed
+    # bindsym --to-code $mod+e layout toggle split
 
     # Make the current focus fullscreen
     bindsym --to-code $mod+f fullscreen
@@ -253,7 +256,7 @@ mode "resize" {
     bindsym --to-code Return mode "default"
     bindsym --to-code Escape mode "default"
 }
-bindsym --to-code $mod+r mode "resize"
+# bindsym --to-code $mod+r mode "resize"
 
 #
 # Status Bar:
@@ -263,12 +266,28 @@ bar {
    swaybar_command waybar
 }
 
-include /etc/sway/config.d/*
+set $volume_step 5
+set $volume_up pactl set-sink-volume @DEFAULT_SINK@ +$volume_step%
+set $volume_down pactl set-sink-volume @DEFAULT_SINK@ -$volume_step%
+set $volume_mute pactl set-sink-mute @DEFAULT_SINK@ toggle
+set $speaker alsa_output.pci-0000_13_00.6.analog-stereo
+set $headphone alsa_output.pci-0000_03_00.1.hdmi-stereo-extra3
+set $toggle_sink bash -c "if [ "$(pactl get-default-sink)" == $speaker ]; then pactl set-default-sink $headphone; else pactl set-default-sink $speaker; fi"
 
 # Special keys
 # /usr/include/xkbcommon/xkbcommon-keysyms.h
-bindsym XF86AudioRaiseVolume exec pulsemixer --change-volume +5
-bindsym XF86AudioLowerVolume exec pulsemixer --change-volume -5
-bindsym XF86AudioMute exec pulsemixer --toggle-mute
+bindsym XF86AudioRaiseVolume exec $volume_up
+bindsym XF86AudioLowerVolume exec $volume_down
+bindsym XF86AudioMute exec pulsemixer $volume_mute
 
 bindsym Print exec grim -g "$(slurp -d)" -t png - | swappy -f -
+bindsym Alt+Print exec grim -t png - | swappy -f -
+
+include /etc/sway/config.d/*
+
+# themes
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme Light-decay
+    gsettings set org.gnome.desktop.interface icon-theme Papirus-Light
+    gsettings set org.gnome.desktop.interface font-name 'Cantarell 11'
+}

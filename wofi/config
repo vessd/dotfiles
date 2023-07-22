@@ -1,5 +1,10 @@
+prompt="Run Comman"
 show=drun
 allow_images=true
-#drun-print_command=true
+allow_markup=true
+insensitive=true
 hide_scroll=true
-width=400
+lines=10
+no_actions=true
+width=600
+term=foot
