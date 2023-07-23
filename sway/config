@@ -9,9 +9,10 @@
 # Notification daemon
 exec mako
 # Automatically switch the horizontal / vertical window split
-exec autotiling
+exec autotiling-rs
 exec nm-applet --indicator
 exec "sh -c 'sleep 5 && exec qbittorrent'"
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 ### Windows rules
 ## swaymsg -t get_tree
