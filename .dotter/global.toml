@@ -38,7 +38,7 @@
 "foot.ini" = "~/.config/foot/foot.ini"
 
 [waybar.files]
-"waybar" = "~/.config/waybar"
+"waybar" = { target = "~/.config/waybar", type = "symbolic" }
 
 [wlogout.files]
 "wlogout/layout" = "~/.config/wlogout/layout"
