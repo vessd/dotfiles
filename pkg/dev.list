@@ -1,0 +1,10 @@
+cmake
+gdb
+git
+nasm
+qtcreator
+rust
+vagrant
+virtualbox
+virtualbox-host-modules-arch
+wireshark-qt
