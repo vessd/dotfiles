@@ -8,7 +8,6 @@
 
 [user.files]
 "environment.d" = "~/.config/environment.d"
-"nanorc" = "~/.config/nano/nanorc"
 "backgrounds" = { target = "~/.local/share/backgrounds", type = "symbolic" }
 
 [pacman.files]
