@@ -10,6 +10,9 @@ mako
 mpv
 network-manager-applet
 noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
+noto-fonts-extra
 otf-font-awesome
 papirus-icon-theme
 polkit-gnome
