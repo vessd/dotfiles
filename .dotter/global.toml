@@ -5,9 +5,10 @@
 "locale/locale.conf" = { target = "/etc/locale.conf", type = "template",  owner = "root" }
 "mkinitcpio.conf.d" = { target = "/etc/mkinitcpio.conf.d", type = "template", owner = "root" }
 "tty1-autologin.conf" = { target = "/etc/systemd/system/getty@tty1.service.d/override.conf", type = "template", owner = "root" }
+"environment" = { target = "/etc/environment", type = "template", owner = "root" }
 
 [user.files]
-"environment.d" = "~/.config/environment.d"
+"bin" = "~/.local/bin"
 "backgrounds" = { target = "~/.local/share/backgrounds", type = "symbolic" }
 
 [pacman.files]
@@ -20,9 +21,6 @@
 [bash.files]
 "bash/bashrc" = "~/.bashrc"
 "bash/bash_profile" = "~/.bash_profile"
-
-[bin.files]
-"bin" = "~/.local/bin"
 
 [git.files]
 "gitconfig" = "~/.gitconfig"
@@ -53,7 +51,6 @@
 [sway]
 depends = [
     "foot",
-    "bin",
     "bash",
     "mako",
     "waybar",
