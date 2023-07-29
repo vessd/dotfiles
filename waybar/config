@@ -1,64 +1,37 @@
-// =============================================================================
-//
-// Waybar configuration
-//
-// Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
-//
-// =============================================================================
 {
-  // -------------------------------------------------------------------------
-  // Global configuration
-  // -------------------------------------------------------------------------
-  "layer": "top",
-  // If height property would be not present, it'd be calculated dynamically
-  "height": 30,
-  "position": "top",
   "modules-left": [
-    "custom/menu",
     "sway/workspaces",
-    "custom/scratchpad",
-    "sway/mode"
   ],
+
   "modules-center": [
-    "sway/window"
-  ],
-  "modules-right": [
-    "custom/left-arrow",
-    "custom/screencast",
+    "custom/weather",
     "custom/playerctl",
-    "network",
+    "pulseaudio",
     "temperature",
     "cpu",
     "memory",
-    "pulseaudio",
-    "custom/pacman",
+    "network",
     "sway/language",
-    "bluetooth",
-    "custom/help",
-    //"upower",
-    "custom/sunset",
+  ],
+  
+  "modules-right": [
     "tray",
     "clock",
+    "custom/power",
   ],
-  // -------------------------------------------------------------------------
-  // EX
-  // -------------------------------------------------------------------------
-  "custom/left-arrow": {
-    "format": "",
+
+  "custom/weather": {
+    "exec": "~/.local/bin/weather.sh",
+    "interval": 3600,
+    "on-click": "foot bash -c 'curl -H \"Accept-Language: ru\" --compressed https://wttr.in/Санкт-Петербург && read -n 1'",
     "tooltip": false,
   },
-  "custom/right-arrow": {
-    "format": "",
-    "tooltip": false
-  },
-  // -------------------------------------------------------------------------
-  // user
-  // -------------------------------------------------------------------------
+  
   "custom/playerctl": {
     "interval": "once",
     "tooltip": true,
     "return-type": "json",
-    "format": "{icon}",
+    "format" : "{icon}",
     "format-icons": {
       "Playing": "󰐌",
       "Paused": "󰏥"
@@ -70,170 +43,64 @@
     "on-scroll-down": "playerctl position 10-; pkill -RTMIN+5 waybar",
     "signal": 5
   },
-  "custom/sunset": {
-    "interval": "once",
-    "tooltip": false,
-    "return-type": "json",
-    "format": "{icon}",
-    "format-icons": {
-      "on": "󱩷",
-      "off": "󱓤"
-    },
-    "exec": "~/.config/sway/scripts/sunset.sh",
-    "on-click": "~/.config/sway/scripts/sunset.sh toggle; pkill -RTMIN+6 waybar",
-    "exec-if": "~/.config/sway/scripts/sunset.sh check",
-    "signal": 6
-  },
-  "custom/scratchpad": {
-    "interval": "once",
-    "return-type": "json",
-    "format": "{icon}",
-    "format-icons": {
-      "one": "",
-      "many": ""
-    },
-    "exec": "~/.config/sway/scripts/scratchpad.sh",
-    "on-click": "swaymsg 'scratchpad show'",
-    "signal": 7
-  },
-  "custom/screencast": {
-    "interval": "once",
-    "tooltip": false,
-    "return-type": "json",
-    "format": "{icon}",
-    "format-icons": {
-      "run": ""
-    },
-    "exec": "sleep 0.5 && pkill -0 wf-recorder && echo '{\"alt\":\"run\"}' || echo '{\"alt\":\"stop\"}'",
-    "on-click": "killall -s SIGINT wf-recorder && pkill -RTMIN+8 waybar",
-    "signal": 8
-  },
-  "custom/pacman": {
-    "format": "󰀼 {}",
-    "interval": 3600,
-    "exec-if": "[ $(pamac checkupdates -q | wc -l) -gt 0 ]",
-    "exec": "pamac checkupdates -q | wc -l",
-    "on-click": "pamac-manager --updates; pkill -SIGRTMIN+8 waybar",
-  },
-  "custom/menu": {
-    "format": "",
-    "on-click": "swaymsg exec \\$menu",
-    "tooltip": false
-  },
-  "custom/help": {
-    "format": "󰋗",
-    //"min-length": 1,
-    "tooltip": false,
-    "on-click": "swaymsg exec \"\\$term_float ~/.config/sway/scripts/help-keymap.sh\""
-  },
-  // -------------------------------------------------------------------------
-  // Modules
-  // -------------------------------------------------------------------------
-  "clock": {
-    "interval": 60,
-    //"format": "{:%e %b %Y %H:%M}",
-    "format": "{:%e/%m %H:%M}",
-    "tooltip": true,
-    "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>",
-    "on-click": "swaymsg exec \\$term_float khal interactive"
-  },
-  "cpu": {
-    "interval": 5,
-    "format": "󰍛 {usage}%", // Icon: microchip
-    "states": {
-      "warning": 70,
-      "critical": 90
-    },
-    "on-click": "swaymsg exec \\$term_float htop"
-  },
-  "memory": {
-    "interval": 5,
-    //"min-length": 5,
-    "format": "󰘚 {}%", // Icon: memory
-    "states": {
-      "warning": 70,
-      "critical": 90
-    },
-    "on-click": "swaymsg exec \\$term_float htop"
-  },
-  "network": {
-    "interval": 5,
-    "interface": "wlan0",
-    //"min-length": 4,
-    "format": "{ifname}",
-    "format-wifi": "󰖩 {signalStrength}%", // Icon: wifi
-    "format-ethernet": "󰈀 {ifname}", // Icon: ethernet
-    "format-disconnected": "󱘖",
-    //"format-wifi": "󰖩  {essid} ({signalStrength}%)", // Icon: wifi
-    "tooltip-format": "{ifname}: {ipaddr}",
-    "on-click": "swaymsg exec \\$term_float nmtui"
-  },
-  "sway/mode": {
-    "format": "<span style=\"italic\">{}</span>",
-    "tooltip": false
-  },
-  "sway/window": {
-    "format": "{}",
-    "max-length": 50
-  },
+
   "pulseaudio": {
-    "format": "{icon} {volume}% 󰍬 {format_source}",
-    "format-bluetooth": "{icon}󰂰 {volume}% 󰍬 {format_source}",
+    "format": "{icon} {volume}%",
     "format-muted": "󰖁",
     "format-icons": {
-      "headphones": "󰋋",
-      "handsfree": "󱋿",
-      "headset": "󰋎",
-      "phone": "󰏲",
-      "portable": "󰄝",
-      "car": "󰄋",
-      "default": [
-        "󰕿",
-        "󰖀",
-        "󰕾"
-      ]
+      "default": ["󰕿", "󰖀", "󰕾"]
     },
     "on-click": "swaymsg exec \\$toggle_sink",
-    "on-click-right": "swaymsg exec \\$mic_mute",
-    "tooltip-format": "{icon} {volume}% {format_source}",
     "on-scroll-up": "swaymsg exec \\$volume_up",
-    "on-scroll-down": "swaymsg exec \\$volume_down"
+    "on-scroll-down": "swaymsg exec \\$volume_down",
+    "tooltip": false,
   },
+
   "temperature": {
-    //"min-length": 2,
-    "interval": 2,
+    "interval": 1,
     "hwmon-path": "/sys/class/hwmon/hwmon5/temp1_input",
     "critical-threshold": 90,
     "format": "{icon} {temperatureC}°C",
-    "format-icons": [
-      "",
-      "",
-      ""
-    ],
-    "tooltip": true,
-    "on-click": "swaymsg exec \"\\$term_float watch sensors\""
+    "format-icons": ["", "", ""],
   },
-  "tray": {
-    "icon-size": 20,
-    "spacing": 10
+
+  "cpu": {
+    "format":"󰍛 {usage}%",
+    "on-click": "foot htop",
+    "tooltip": false,
   },
-  "bluetooth": {
-    "format": "",
-    "format-connected": "󰂱",
-    "format-connected-battery": "󰂱{device_battery_percentage}%",
-    //"format-connected": " {device_alias}",
-    //"format-connected-battery": " {device_alias} {device_battery_percentage}%",
-    // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-    "tooltip-format": "{controller_alias}\t{controller_address}",
-    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n{device_enumerate}",
-    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
-    "on-click": "blueberry"
+
+  "memory": {
+    "format": " {used:0.1f}/{total:0.1f} GiB",
+    "on-click": "foot htop",
+    "tooltip": false,
   },
+
+  "network": {
+    "format-ethernet": "󰈀 {ifname}",
+    "format-disconnected": "󱘖",
+  },
+
   "sway/language": {
     "min-length": 5,
     "format": " {}",
     "tooltip": false,
     "on-click": "swaymsg input $(swaymsg -t get_inputs --raw | jq '[.[] | select(.type == \"keyboard\")][0] | .identifier') xkb_switch_layout next"
-  }
+  },
+ 
+  "tray": {
+    "spacing": 10,
+  },
+
+  "clock": {
+    "format": "{:%A, %d %B %R}",
+    "on-click": "foot bash -c 'cal -3 && read -n 1'",
+    "tooltip-format": "<big>{:%Y %b}</big>\n<tt>{calendar}</tt>",
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "wlogout -b 2 -p layer-shell",
+    "tooltip": false,
+  },
 }

@@ -25,20 +25,6 @@ window#waybar {
     color: #ffffff;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-window#waybar.firefox {
-    background-color: #2e3440;
-}
-
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 #workspaces button:hover {
     box-shadow: inherit;
@@ -50,116 +36,76 @@ window#waybar.firefox {
 }
 
 #workspaces button.urgent {
-    color: #BF616A;
+    color:  #BF616A;
 }
 
 /* TASKBAR */
 #taskbar {
     margin: 2px 0px 2px 0px;
 }
-
 #taskbar button {
     border-radius: 10px;
     font-size: 13px;
     margin: 0px 3px 0px 3px;
     padding: 0px 3px 0px 3px;
 }
-
 #taskbar button.active {
     /* background-color: #434c5e; */
     background-color: #2e3440;
 }
-
 #taskbar button:hover {
     box-shadow: inherit;
-    background-color: rgba(35, 39, 49, 0.4);
-}
-
-/* BROWSER BOOKMARKS */
-#custom-github,
-#custom-youtube,
-#custom-mail {
-    background-color: #3B4252;
-    font-size: 18px;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0px 15px 0px 15px;
-}
-
-#custom-github {
-    border-radius: 10px 0px 0px 10px;
-    color: #d08770;
-}
-
-#custom-youtube {
-    color: #b48ead;
-}
-
-#custom-mail {
-    border-radius: 0px 10px 10px 0px;
-    color: #88c0d0;
-    font-size: 15px;
+    background-color: rgba(35,39,49,0.4);
 }
 
 /* WIDGETS */
-#custom-weather,
-#pulseaudio,
-#memory,
-#cpu,
-#network,
-#custom-pacman {
-    font-size: 14px;
+#custom-weather, #custom-playerctl, #pulseaudio, #temperature, #cpu, #memory, #network, #language {
+  font-size: 14px;
     background-color: #2e3440;
     padding: 0px 14px 0px 14px;
     margin: 2px 0px 2px 0px;
 }
 
 #custom-weather {
-    color: #81a1c1;
+    color:#81a1c1;
     border-radius: 10px 0px 0px 10px;
     padding: 0px 8px 0px 8px;
 }
 
+#custom-playerctl {
+    color: #8fbcbb;    
+}
+
 #pulseaudio {
-    color: #8fbcbb;
+    color: #8fbcbb;    
 }
 
 #pulseaudio.muted {
     color: #4c566a;
 }
 
-#memory {
-    color: #d08770;
+#temperature {
+    color:#c57078;
 }
 
 #cpu {
-    color: #c57078;
+    color:#c57078;
+}
+
+#memory {
+    color:#d08770;
 }
 
 #network {
-    color: #9da98d;
+  color: #9da98d;
 }
 
-#custom-pacman {
+#language {
     color: #ebcb8b;
     border-radius: 0px 10px 10px 0px;
-    font-weight: 600;
 }
 
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
-}
-
-label:focus {
-    background-color: #000000;
-}
-
-#clock,
-#tray,
-#custom-power {
+#clock, #tray, #custom-power {
     background-color: #3b4252;
     padding: 2px 10px 2px 10px;
     margin: 2px 0px 2px 0px;
