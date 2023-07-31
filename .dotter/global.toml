@@ -29,7 +29,7 @@
 "xdg-user-dirs" = "~/.config"
 
 [sway.files]
-"sway" = "~/.config/sway"
+"sway" = { target = "~/.config/sway", type = "symbolic" }
 
 [foot.files]
 "foot.ini" = "~/.config/foot/foot.ini"
